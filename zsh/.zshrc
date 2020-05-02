@@ -30,7 +30,22 @@ plugins=(
   zsh-completions # More completions
   zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
   colored-man-pages # Self-explanatory
-  )
+  composer
+  docker-compose
+  docker
+  gitfast
+  git-flow
+  git-extras
+  gitignore
+  github
+  httpie
+  node
+  npm
+  python
+  redis-cli
+  rsync
+  sudo
+)
 autoload -U compinit && compinit # reload completions for zsh-completions
 
 source $ZSH/oh-my-zsh.sh # required

@@ -20,7 +20,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/aaronkjones/noobs-term/mas
 
 echo
 echo " Backing up existing files"
-mv -f -n --backup --suffix=".backup" "$DOTFILES_PATH" "$DOTFILES_PATH.backup"
+mv -f --backup --suffix=".backup" "$DOTFILES_PATH" "$DOTFILES_PATH.backup"
 
 echo
 echo " Cloning into: '$DOTFILES_PATH'"
