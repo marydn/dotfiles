@@ -8,13 +8,13 @@ bash <(curl -s https://raw.githubusercontent.com/marydn/dotfiles/master/installe
 
 or 
 
-```
+```bash
 sh -c "$(wget -q https://raw.githubusercontent.com/marydn/dotfiles/master/installer -O -)"
 ```
 
 or
 
-```
+```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/marydn/dotfiles/master/installer)"
 ```
 
