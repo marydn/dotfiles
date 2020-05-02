@@ -6,18 +6,6 @@ Execute the [`installer`](installer) from your terminal in order to avoid even h
 bash <(curl -s https://raw.githubusercontent.com/marydn/dotfiles/master/installer)
 ```
 
-or 
-
-```bash
-sh -c "$(wget -q https://raw.githubusercontent.com/marydn/dotfiles/master/installer -O -)"
-```
-
-or
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/marydn/dotfiles/master/installer)"
-```
-
 ## Setup
 
 1. Press `Ctrl` + `a`, then `I` to load tmux plugins

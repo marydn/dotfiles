@@ -3,26 +3,33 @@ set -euo pipefail
 
 export DOTFILES_PATH="$HOME/.dotfiles"
 
+echo
 echo "🚀 Dotfiles installer!"
 echo "-------------------------------------------------"
 echo
 echo " Installing basic packages"
 sudo apt install -y --quiet git stow
 
-echo "🍎 Installing neovim"
+echo
+echo "📝 Installing neovim"
 sudo snap install --beta nvim --classic
 
+echo
 echo " Installing noobs-term"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/aaronkjones/noobs-term/master/noobs-term.sh)"
 
+echo
 echo " Cloning into: '$DOTFILES_PATH'"
 # To test that git is installed (if not macOS will prompt an installer)
 git --version
-
 git clone --depth 1 git@github.com:marydn/dotfiles.git "$DOTFILES_PATH"
 cd "$DOTFILES_PATH"
+
+echo
+echo " Installing dotfiles"
 stow zsh tmux git
 
+echo
 echo "🔀 Setting Git config"
 read -rp " What is you email? " git_email
 read -rp " And your name? " git_name
