@@ -41,7 +41,8 @@
 	autocrlf = input
 	trustctime = false
 	precomposeunicode = false
-	pager = delta --dark
+	# pager = delta --dark
+    pager = less -x4
 	ignorecase = false
 
 [help]
