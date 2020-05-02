@@ -1,15 +1,37 @@
 #!/bin/bash
 set -euo pipefail
 
+export DOTFILES_PATH="$HOME/.dotfiles"
+
 echo "🚀 Dotfiles installer!"
 echo "-------------------------------------------------"
 echo
-export DOTFILES_PATH="$HOME/.dotfiles"
-echo "👉  Cloning into: '$DOTFILES_PATH'"
+echo " Installing basic packages"
+sudo apt install -y --quiet git stow
 
+echo "🍎 Installing neovim"
+sudo snap install --beta nvim --classic
+
+echo " Installing noobs-term"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/aaronkjones/noobs-term/master/noobs-term.sh)"
+
+echo " Cloning into: '$DOTFILES_PATH'"
 # To test that git is installed (if not macOS will prompt an installer)
 git --version
 
 git clone --depth 1 git@github.com:marydn/dotfiles.git "$DOTFILES_PATH"
+cd "$DOTFILES_PATH"
+stow zsh tmux git
 
-"$DOTFILES_PATH/bin/dot" self install
+echo "🔀 Setting Git config"
+read -rp " What is you email? " git_email
+read -rp " And your name? " git_name
+read -rp " Aaaand… the ID of the signing key? " git_key_id
+
+git config --global user.email "$git_email"
+git config --global user.name "$git_name"
+git config --global user.signingkey "$git_key_id"
+git config --global --unset user.signingkey
+git config --global --unset commit.gpgsign
+git config --global --unset tag.gpgsign
+git config --global --unset gpg.program

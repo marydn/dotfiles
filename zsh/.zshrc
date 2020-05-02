@@ -101,7 +101,7 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 
 
 #
-# Mary stuff
+# Mary's customs
 #
 
 SPACESHIP_PROMPT_ADD_NEWLINE=false
@@ -113,4 +113,3 @@ SPACESHIP_CHAR_SYMBOL="%{$fg[blue]%}🦙 %b "
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_PREFIX=""
 SPACESHIP_TIME_COLOR=blue
-
