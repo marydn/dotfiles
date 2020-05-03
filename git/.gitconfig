@@ -7,23 +7,23 @@
 	prune = true
 
 [push]
-    # A much better default than 'matching'. From the man page:
-    #
-    # Defines the action git push should take if no refspec is given on the
-    # command line, no refspec is configured in the remote, and no refspec is
-    # implied by any of the options given on the command line. Possible values
-    # are:
-    #
-    # o nothing - do not push anything.
-    # o matching - push all matching branches. All branches having the same name
-    # in both ends are considered to be matching. This is the default.
-    # o upstream - push the current branch to its upstream branch.
-    # o tracking - deprecated synonym for upstream.
-    # o current - push the current branch to a branch of the same name.
+	# A much better default than 'matching'. From the man page:
+	#
+	# Defines the action git push should take if no refspec is given on the
+	# command line, no refspec is configured in the remote, and no refspec is
+	# implied by any of the options given on the command line. Possible values
+	# are:
+	#
+	# o nothing - do not push anything.
+	# o matching - push all matching branches. All branches having the same name
+	# in both ends are considered to be matching. This is the default.
+	# o upstream - push the current branch to its upstream branch.
+	# o tracking - deprecated synonym for upstream.
+	# o current - push the current branch to a branch of the same name.
 	default = simple
 
 [pull]
-    rebase = true
+	rebase = true
 
 [color]
 	diff = auto
@@ -32,7 +32,7 @@
 	ui = true
 
 [branch]
-    autosetuprebase = always
+	autosetuprebase = always
 
 [core]
 	excludesfile = ~/.gitignore_global
@@ -41,8 +41,7 @@
 	autocrlf = input
 	trustctime = false
 	precomposeunicode = false
-	# pager = delta --dark
-    pager = less -x4
+	pager = less -x4
 	ignorecase = false
 
 [help]
@@ -106,7 +105,7 @@
 	whitespace = fix
 
 [commit]
-    template = ~/.gitmessage
+	template = ~/.gitmessage
 	gpgsign = true
 
 [tag]
@@ -116,7 +115,7 @@
 	program = /usr/local/bin/gpg
 
 [alias]
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
-    count-month = shortlog -sne --since="01 Nov 2016" --before="30 Nov 2016"
-    yolo = !git add -A && git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
-    clean-local-branches = branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	count-month = shortlog -sne --since="01 Nov 2016" --before="30 Nov 2016"
+	yolo = !git add -A && git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+	clean-local-branches = branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d
