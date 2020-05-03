@@ -41,4 +41,4 @@ git yolo && git push
 !git add -A && git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
 ```
 
-[whatthecommit.com](http://whatthecommit.com/) is a web app that generates random commit messages every time you request the index page, so we're getting that random message and using it to create a commit.
+> [whatthecommit.com](http://whatthecommit.com/) is a web app that generates random commit messages every time you request the index page, so we're getting that random message and using it to create a commit.
