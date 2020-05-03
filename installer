@@ -1,119 +1,21 @@
 #!/bin/bash
 
-#set -euo pipefail
+set -euo pipefail
 
 echo
 echo "🚀 Dotfiles installer!"
 echo "-------------------------------------------------"
 echo
-echo " Installing basic packages"
+echo "🎯 Installing basic packages"
 sudo apt install -y --quiet git
-
 echo
-echo "📝 Installing neovim"
+echo "🖊 Installing neovim"
 sudo snap install --beta nvim --classic
-
 echo
-echo " Installing noobs-term"
+echo "🤖 Installing noobs-term"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/aaronkjones/noobs-term/master/noobs-term.sh)"
-
+echo
 # Reset colors from previous scripts
-echo -e "\e[0m"
-
-# After all of that we have a $HOME/.dotfiles directory created
-# and symlinks to files in this directory
-export DOTFILES_PATH="$HOME/.dotfiles"
-
-dotfiles=".tmux.conf \
-.zshrc \
-.tmux \
-.zsh \
-.oh-my-zsh \
-"
-
-DOTFILES_CUSTOM_REPOSITORY="https://github.com/marydn/dotfiles.git"
-
-# make git be quiet
-quiet_git() {
-	stdout=$(mktemp)
-	stderr=$(mktemp)
-
-	if ! git "$@" </dev/null >"$stdout" 2>"$stderr"; then
-		cat "$stderr" >&2
-		rm -f "$stdout" "$stderr"
-		exit 1
-	fi
-
-	rm -f "$stdout" "$stderr"
-}
-
-# backup dotfiles
-backup_dotfiles() {
-	echo "Backing up dotfiles from installation..."
-#	for d in $dotfiles; do
-#	  echo " Backing up $HOME/$d to $DOTFILES_PATH.backup/$d"
-#		cp -rfH "$HOME/$d" "$DOTFILES_PATH.backup/$d" 2>/dev/null || :
-#	done
-	cp -rf "$DOTFILES_PATH" "$DOTFILES_PATH.backup" 2>/dev/null || :
-#	cp -f "$nvim_config" "$HOME/.config/nvim/init.vim.backup" 2>/dev/null || :
-#	cp -rf "$HOME/.oh-my-zsh" "$HOME/.oh-my-zsh.backup" 2>/dev/null || :
-	echo "Done"
-}
-
-# install dotfiles
-install_dotfiles() {
-	echo "Installing dotfiles into $DOTFILES_PATH..."
-	quiet_git clone --depth=1 "$DOTFILES_CUSTOM_REPOSITORY" "$DOTFILES_PATH"
-
-	echo "Symbolically linking dotfiles to home directory (e.g. ln -s $DOTFILES_PATH/.zshrc $HOME/.zshrc)"
-	find "$DOTFILES_PATH" -type f -name "(.*|gitmessage.txt)" -exec ln -sf {} "$HOME" \; >/dev/null 2>&1
-#	if [ ! -d "$HOME/.config/nvim" ]; then
-#		mkdir -p "$HOME/.config/nvim"
-#	fi
-#	ln -s "$DOTFILES_PATH/init.vim" "$nvim_config"
-}
-
-# remove dotfiles
-remove_old_dotfiles() {
-	echo "Removing old dotfiles..."
-#	for d in $dotfiles; do
-#		rm -rf "${HOME:?}"/"$d"
-#	done
-	rm -rf "$DOTFILES_PATH"
-	#rm -f "$nvim_config"
-	#rm -rf "$HOME/.oh-my-zsh"
-	echo "Done"
-}
-
-config_git() {
-  echo "🔀 Setting Git config"
-  read -rp " What is you email? " git_email
-  read -rp " And your name? " git_name
-  read -rp " Aaaand… the ID of the signing key? " git_key_id
-
-  git config --global user.email "$git_email"
-  git config --global user.name "$git_name"
-  git config --global user.signingkey "$git_key_id"
-  git config --global gpg.program "$(which gpg)"
-#  git config --global --unset user.signingkey
-#  git config --global --unset commit.gpgsign
-#  git config --global --unset tag.gpgsign
-#  git config --global --unset gpg.program
-}
-
-# backup and remove dotfiles
-if [ -d "$DOTFILES_PATH" ]; then
-	echo "Old dotfiles exist"
-	echo
-	backup_dotfiles
-	echo
-	remove_old_dotfiles
-	echo
-fi
-
-# install dotfiles
-install_dotfiles
+echo -e '\e[0m'
 echo
-
-config_git
-echo
+sh ./scripts/customization

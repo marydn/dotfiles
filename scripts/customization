@@ -1,0 +1,94 @@
+#!/bin/bash
+
+set -euo pipefail
+
+export DOTFILES_PATH="$HOME/.dotfiles"
+export DOTFILES_CUSTOM_REPOSITORY="https://github.com/marydn/dotfiles.git"
+
+# make git be quiet
+quiet_git() {
+	stdout=$(mktemp)
+	stderr=$(mktemp)
+
+	if ! git "$@" </dev/null >"$stdout" 2>"$stderr"; then
+		cat "$stderr" >&2
+		rm -f "$stdout" "$stderr"
+		exit 1
+	fi
+
+	rm -f "$stdout" "$stderr"
+}
+
+# backup dotfiles
+backup_dotfiles() {
+	echo "Backing up dotfiles from installation..."
+	cp -rf "$DOTFILES_PATH" "$DOTFILES_PATH.backup" 2>/dev/null || :
+	echo "Done"
+}
+
+# install dotfiles
+install_dotfiles() {
+	echo "Installing dotfiles into $DOTFILES_PATH..."
+	quiet_git clone --depth=1 "$DOTFILES_CUSTOM_REPOSITORY" "$DOTFILES_PATH"
+
+	echo "Symbolically linking dotfiles to home directory (e.g. ln -s $DOTFILES_PATH/.zshrc $HOME/.zshrc)"
+	find "$DOTFILES_PATH" -type f -name "(.*|gitmessage.txt)" -exec ln -sf {} "$HOME" \; >/dev/null 2>&1
+}
+
+# remove dotfiles
+remove_old_dotfiles() {
+	echo "Removing old dotfiles..."
+	rm -rf "$DOTFILES_PATH"
+	echo "Done"
+}
+
+config_git() {
+  echo "🔭 Setting Git config"
+  read -rp " 🦄 What is you email? " git_email
+  read -rp " 👥 And your name? " git_name
+  read -rp " 🔑 the ID of the signing key? " git_key_id
+
+  git config --global user.email "$git_email"
+  git config --global user.name "$git_name"
+  git config --global user.signingkey "$git_key_id"
+  git config --global gpg.program "$(which gpg)"
+}
+
+
+echo
+echo "🍄 Init customization"
+echo "-------------------------------------------------"
+echo
+
+# backup and remove dotfiles
+if [ -d "$DOTFILES_PATH" ]; then
+	echo "Old dotfiles exist"
+	echo
+	backup_dotfiles
+	echo
+	remove_old_dotfiles
+	echo
+fi
+
+# install dotfiles
+install_dotfiles
+echo
+
+config_git
+echo
+
+cat ../ascii.txt
+echo
+echo "      * Note: You will have to log out and back in for Zsh to be set as the default shell."
+echo "              If you don't want to log out now, enter 'zsh'"
+echo 
+echo 
+echo '      * Press Ctrl + a, then I to load Tmux plugins'
+echo 
+echo '      * In Gnome Terminal preferences, set Nord as your default profile'
+echo '      * In iTerm, set your color profile to Nord'
+echo 
+echo '      * Set an appropriate font (e.g. Inconsolata for Powerline)'
+echo 
+echo 
+echo "🦙 Installation completed"
