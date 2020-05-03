@@ -106,7 +106,7 @@
 	whitespace = fix
 
 [commit]
-    template = ~/.gitmessage.txt
+    template = ~/.gitmessage
 	gpgsign = true
 
 [tag]
