@@ -18,4 +18,4 @@ echo
 # Reset colors from previous scripts
 echo -e '\e[0m'
 echo
-sh ./scripts/customization
+sh "$PWD/scripts/customization"

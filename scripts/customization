@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+#set -euo pipefail
 
 export DOTFILES_PATH="$HOME/.dotfiles"
 export DOTFILES_CUSTOM_REPOSITORY="https://github.com/marydn/dotfiles.git"
@@ -43,10 +43,10 @@ remove_old_dotfiles() {
 }
 
 config_git() {
-  echo "🔭 Setting Git config"
-  read -rp " 🦄 What is you email? " git_email
-  read -rp " 👥 And your name? " git_name
-  read -rp " 🔑 the ID of the signing key? " git_key_id
+  echo " 🔭 Setting Git config"
+  read -rp " Email       : " git_email
+  read -rp " Name        : " git_name
+  read -rp " Signing key : " git_key_id
 
   git config --global user.email "$git_email"
   git config --global user.name "$git_name"
@@ -77,7 +77,7 @@ echo
 config_git
 echo
 
-cat ../ascii.txt
+cat "$PWD/../ascii.txt"
 echo
 echo "      * Note: You will have to log out and back in for Zsh to be set as the default shell."
 echo "              If you don't want to log out now, enter 'zsh'"
@@ -91,4 +91,4 @@ echo
 echo '      * Set an appropriate font (e.g. Inconsolata for Powerline)'
 echo 
 echo 
-echo "🦙 Installation completed"
+echo " 🦙 Installation completed"
