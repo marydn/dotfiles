@@ -22,6 +22,23 @@ bash <(curl -s https://raw.githubusercontent.com/marydn/dotfiles/master/installe
 2. In Gnome terminal preferences, set Nord as your default profile
 3. Set an appropriate font (e.g. Inconsolata for Powerline)
 
-### UI Preview:
+## UI Preview:
 
 ![image info](./doc/images/demo.png)
+
+
+## Side notes
+
+All commits for this repository were made using:
+
+```bash
+git yolo && git push
+```
+
+`git yolo` is an alias for git you can check in the [.gifconfig](./git/.gitconfig) file. It will execute:
+
+```bash
+!git add -A && git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+```
+
+[whatthecommit.com](http://whatthecommit.com/) is a web app that generates random commit messages every time you request the index page, so we're getting that random message and using it to create a commit.
